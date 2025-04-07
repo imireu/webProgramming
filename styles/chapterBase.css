@@ -1,0 +1,67 @@
+/* 기본 리셋 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 본문 기본 스타일 */
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+/* 제목 스타일 */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+/* 본문 및 목록 */
+p, li {
+  margin-bottom: 0.5rem;
+}
+
+ul, ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* 코드 블록 */
+pre {
+  background-color: #f0f0f0;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+code {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #f9f9f9;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+}
+
+/* 링크 */
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
