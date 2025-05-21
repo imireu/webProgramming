@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>웹프로그래밍 프로젝트</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Noto Sans KR", sans-serif;
+      background-color: #f2f4f6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .menu {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .menu a {
+      text-decoration: none;
+      background-color: white;
+      border: 1px solid #dee2e6;
+      border-radius: 12px;
+      padding: 2rem 3rem;
+      font-size: 1.2rem;
+      color: #333;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .menu a:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    footer {
+      margin-top: 4rem;
+      font-size: 0.85rem;
+      color: #888;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>웹프로그래밍</h1>
+  <div class="menu">
+    <a href="summary/index.html">챕터별 강의 정리 보기</a>
+    <a href="project/index.html">주제가 있는 웹 콘텐츠</a>
+  </div>
+  <footer>© 2025 imireu</footer>
+</body>
+
+</html>

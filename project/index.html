@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booklog</title>
+  <link rel="stylesheet" href="/project/styles/index.css">
+</head>
+
+<body>
+  <header class="minimal-header">
+    <div class="container header-flex">
+      <h1 class="logo">Booklog</h1>
+      <nav class="nav-links">
+        <a href="#" class="active">Books</a>
+        <a href="#">Favorites</a>
+        <a href="#">Reviews</a>
+        <a href="#">Login</a>
+      </nav>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="검색어를 입력하세요" />
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="bookList" class="book-grid"></section>
+    <section id="bookDetail" class="book-detail" style="display:none;"></section>
+    <section id="reviewArea" class="review-area" style="display:none;"></section>
+  </main>
+
+  <script src="app.js"></script>
+
+  <footer>
+    <p>© 2025 Booklog. All rights reserved.</p>
+  </footer>
+
+</body>

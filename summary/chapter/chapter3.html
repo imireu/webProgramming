@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chapter 3: CSS(2) & JavaScript</title>
+  <link rel="stylesheet" href="/styles/index.css">
+  <link rel="stylesheet" href="/styles/chapterBase.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Chapter 3: CSS(2) & JavaScript</h1>
+  </header>
+  <main>
+    <section>
+      <h2>CSS (2)</h2>
+
+      <h3>레이아웃이란?</h3>
+      <p>웹 페이지 내 요소들을 배치하고 구조화하는 방식으로, 사용자 경험에 핵심적인 역할을 함.</p>
+
+      <h3>CSS 레이아웃 설정 방식</h3>
+      <ul>
+        <li><strong>일반 흐름(Normal Flow)</strong>: 요소가 기본 블록 또는 인라인 형식으로 위에서 아래로 쌓임</li>
+        <li><strong>Positioning</strong>: static / relative / absolute / fixed / sticky</li>
+        <li><strong>Flexbox</strong>: 일차원 레이아웃 구성. 주요 속성:
+          <ul>
+            <li>display: flex</li>
+            <li>flex-direction</li>
+            <li>justify-content (ex: center, space-between, space-around)</li>
+            <li>align-items (ex: stretch, center, flex-start, flex-end)</li>
+            <li>align-content</li>
+          </ul>
+        </li>
+        <li><strong>Grid</strong>: 2차원 레이아웃 구성. 주요 속성:
+          <ul>
+            <li>display: grid</li>
+            <li>grid-template-columns, grid-template-rows</li>
+            <li>grid-gap / gap</li>
+            <li>justify-items / align-items</li>
+            <li>place-items, place-content</li>
+          </ul>
+        </li>
+        <li><strong>Float</strong>: 요소를 좌우로 띄워 배치 (옛날 방식, clearfix 필요)</li>
+        <li><strong>Table Layout</strong>: 테이블 기반 배치</li>
+        <li><strong>Multi-column Layout</strong>: 신문/잡지처럼 다단 레이아웃 구성</li>
+      </ul>
+
+      <h4>Flexbox 예제</h4>
+      <pre><code>display: flex;
+justify-content: center;
+align-items: center;</code></pre>
+
+      <h4>Grid 예제</h4>
+      <pre><code>display: grid;
+grid-template-columns: 1fr 2fr;
+gap: 10px;</code></pre>
+
+      <h3>HTML5 레이아웃 태그 (시맨틱 태그)</h3>
+      <ul>
+        <li>header, nav, main, section, article, aside, footer</li>
+      </ul>
+
+      <h3>박스 모델</h3>
+      <p>모든 HTML 요소는 박스 형태로 렌더링됨. 구성요소:</p>
+      <ul>
+        <li>content → padding → border → margin</li>
+      </ul>
+
+      <h3>기타 CSS 레이아웃 관련 속성</h3>
+      <ul>
+        <li><strong>display</strong>: block, inline, inline-block, none 등</li>
+        <li><strong>visibility</strong>: visible, hidden</li>
+        <li><strong>opacity</strong>: 투명도 조절 (0 ~ 1)</li>
+      </ul>
+
+      <h3>CSS 애니메이션</h3>
+      <ul>
+        <li>transition: 상태 변화 부드럽게 처리</li>
+        <li>transform: 2D/3D 변형 (rotate, scale, skew, translate)</li>
+        <li>animation: 키프레임 기반 애니메이션</li>
+      </ul>
+
+      <h4>애니메이션 예제</h4>
+      <pre><code>@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.box {
+  animation: fadeIn 2s ease-in-out;
+}</code></pre>
+
+      <h3>뷰포트와 반응형 디자인</h3>
+      <ul>
+        <li>뷰포트: 사용자의 화면 영역</li>
+        <li>meta viewport 태그로 설정 가능</li>
+      </ul>
+
+      <h3>미디어 쿼리</h3>
+      <p>기기 너비/높이, 해상도 등에 따라 스타일 적용:</p>
+      <pre><code>@media (max-width: 768px) {
+  body {
+    background-color: lightgray;
+  }
+}</code></pre>
+
+      <hr />
+
+      <h2>JavaScript</h2>
+
+      <h3>자바스크립트 정의</h3>
+      <p>웹 페이지에 동적 기능을 추가하는 스크립트 언어로, 클라이언트 측에서 실행됨.</p>
+
+      <h3>특징 및 배경</h3>
+      <ul>
+        <li>인터프리터 방식</li>
+        <li>동적 타입(dynamic typing)</li>
+        <li>이벤트 기반(Event-driven)</li>
+        <li>객체 기반(Object-based)</li>
+      </ul>
+
+      <h3>자바스크립트와 ECMAScript</h3>
+      <p>ECMAScript는 자바스크립트의 표준 사양으로, JavaScript는 이를 구현한 언어.</p>
+
+      <h3>ES6 (ECMAScript 2015)</h3>
+      <ul>
+        <li>let, const</li>
+        <li>화살표 함수 (arrow functions)</li>
+        <li>템플릿 리터럴</li>
+        <li>클래스(class), 모듈(module)</li>
+        <li>Promise</li>
+        <li>비구조화 할당(destructuring assignment)</li>
+      </ul>
+
+      <h3>클라이언트와 서버</h3>
+      <p>자바스크립트는 주로 클라이언트에서 실행되지만, Node.js 등을 이용하면 서버에서도 실행 가능</p>
+
+      <h3>자바스크립트 프레임워크 & 라이브러리</h3>
+      <ul>
+        <li>React, Vue.js, Angular, jQuery 등</li>
+      </ul>
+
+      <h3>프론트엔드 개발과 자바스크립트</h3>
+      <p>HTML 구조 생성, CSS 조작, 사용자 입력 이벤트 처리 등 핵심 역할 수행</p>
+
+      <h3>자바스크립트 작성 방식</h3>
+      <ul>
+        <li>인라인 방식: 태그에 직접 작성</li>
+        <li>내부 방식: &lt;script&gt; 태그 내부 작성</li>
+        <li>외부 방식: .js 파일을 연결해 관리</li>
+      </ul>
+
+      <h3>작성 방식의 단점</h3>
+      <p>인라인/내부 스크립트는 유지보수 어려움, 코드 중복, 가독성 저하 → 외부 스크립트 권장</p>
+
+      <h3>DOCTYPE이란?</h3>
+      <p>브라우저가 HTML 문서를 어떤 방식으로 해석해야 하는지 정의. 예: &lt;!DOCTYPE html&gt;</p>
+
+      <h4>자바스크립트 예제</h4>
+      <pre><code>// 내부 스크립트 예시
+&lt;script&gt;
+  alert("Hello, world!");
+&lt;/script&gt;
+
+// 외부 스크립트 연결
+&lt;script src="script.js"&gt;&lt;/script&gt;</code></pre>
+
+      <h4>버튼 클릭으로 동작하는 자바스크립트 예제</h4>
+      <button onclick="alert('버튼이 클릭되었습니다!')">클릭하세요</button>
+      <br><br>
+      <a href="../index.html">← 메인으로 돌아가기</a>
+    </section>
+  </main>
+</body>
+
+</html>

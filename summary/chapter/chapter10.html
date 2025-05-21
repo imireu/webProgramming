@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chapter 10: 객체와 프로토타입</title>
+  <link rel="stylesheet" href="/styles/index.css">
+  <link rel="stylesheet" href="/styles/chapterBase.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Chapter 10: 객체와 프로토타입</h1>
+  </header>
+  <main>
+    <section>
+      <h2>1. 객체 기본 개념</h2>
+
+      <h3>객체 정의와 중첩</h3>
+      <pre><code>const user = {
+  name: "미르",
+  age: 26,
+  address: {
+    city: "서울",
+    zip: "12345"
+  }
+};</code></pre>
+
+      <h3>객체 메서드 정의 & this</h3>
+      <pre><code>const user = {
+  name: "미르",
+  greet() {
+    console.log("안녕하세요, " + this.name + "입니다.");
+  }
+};
+user.greet();</code></pre>
+
+
+      <h2>2. 객체 복사</h2>
+      <ul>
+        <li><strong>원시값</strong>: 값 자체를 복사</li>
+        <li><strong>참조값</strong>: 주소를 복사 (객체, 배열)</li>
+      </ul>
+      <pre><code>const obj1 = { a: 1 };
+const obj2 = obj1; // 참조 복사
+
+const copy = Object.assign({}, obj1); // 얕은 복사
+const deep = JSON.parse(JSON.stringify(obj1)); // 깊은 복사</code></pre>
+
+      <h2>3. 생성자 함수</h2>
+      <pre><code>function Book(title, pages) {
+  this.title = title;
+  this.pages = pages;
+  this.done = false;
+}
+const book1 = new Book("웹 표준", 648);</code></pre>
+
+      <h3>프로토타입 메서드 추가</h3>
+      <pre><code>Book.prototype.finish = function() {
+  this.done = true;
+  return "완독!";
+};</code></pre>
+
+
+      <h2>4. 클래스 정의</h2>
+      <pre><code>class BookC {
+  constructor(title, pages) {
+    this.title = title;
+    this.pages = pages;
+  }
+
+  finish() {
+    return "완독!";
+  }
+}</code></pre>
+
+      <h2>5. 객체의 키와 값에 접근</h2>
+      <pre><code>const user = { name: "미르", age: 26 };
+
+// for...in
+for (let key in user) {
+  console.log(key + ":", user[key]);
+}
+
+// Object 메서드
+console.log(Object.keys(user));   // ["name", "age"]
+console.log(Object.values(user)); // ["미르", 26]
+console.log(Object.entries(user)); // [["name", "미르"], ["age", 26]]</code></pre>
+
+      <h2>6. 프로토타입 개념</h2>
+      <ul>
+        <li><code>__proto__</code>: 인스턴스에서 연결된 부모 프로토타입 참조</li>
+        <li><code>prototype</code>: 생성자 함수에 연결된 객체</li>
+      </ul>
+      <pre><code>function Book(title) {
+  this.title = title;
+}
+Book.prototype.buy = function() {
+  console.log(this.title + "을 구매함");
+};
+
+const b = new Book("모던 JS");
+b.buy();</code></pre>
+
+
+      <h2>7. 프로토타입 상속</h2>
+      <pre><code>function Textbook(title, price, major) {
+  Book.call(this, title, price);
+  this.major = major;
+}
+Textbook.prototype.buyTextbook = function() {
+  console.log(this.major + " 전공 교재: " + this.title);
+};
+Object.setPrototypeOf(Textbook.prototype, Book.prototype);</code></pre>
+
+
+      <h2>8. 클래스 상속</h2>
+      <pre><code>class BookC {
+  constructor(title, price) {
+    this.title = title;
+    this.price = price;
+  }
+
+  buy() {
+    console.log(`${this.title}을(를) ${this.price}원에 구매`);
+  }
+}
+
+class TextbookC extends BookC {
+  constructor(title, price, major) {
+    super(title, price);
+    this.major = major;
+  }
+
+  buyTextbook() {
+    console.log(`${this.major} 전공 서적: ${this.title}`);
+  }
+}</code></pre>
+
+
+      <h3>🌱 [실습] 생성자 함수 + 프로토타입 메서드</h3>
+      <p>도서를 생성하고, 프로토타입 메서드로 정보를 출력해보세요.</p>
+
+      <pre><code>function Book(title, author) {
+  this.title = title;
+  this.author = author;
+}
+Book.prototype.info = function() {
+  return `"${this.title}" by ${this.author}`;
+};</code></pre>
+
+      <button onclick="createBook()" style="margin: 0.5rem 0;">도서 생성 및 출력</button>
+      <div id="bookOutput" style="background: #f9f9f9; padding: 1rem; border-radius: 5px; font-family: monospace;">
+      </div>
+
+      <script>
+        function createBook() {
+          function Book(title, author) {
+            this.title = title;
+            this.author = author;
+          }
+          Book.prototype.info = function () {
+            return `"${this.title}" by ${this.author}`;
+          };
+          const myBook = new Book("자바스크립트 입문", "홍길동");
+          document.getElementById("bookOutput").textContent = myBook.info();
+        }
+      </script>
+      <h3>🌱[실습] 클래스 상속</h3>
+      <p>클래스를 상속받아 동작을 오버라이딩</p>
+
+      <pre><code>class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+  speak() {
+    return `${this.name}이(가) 소리를 냅니다.`;
+  }
+}
+
+class Dog extends Animal {
+  speak() {
+    return `${this.name}이(가) 멍멍 짖습니다.`;
+  }
+}</code></pre>
+
+      <button onclick="showDog()" style="margin: 0.5rem 0;">Dog 클래스 테스트</button>
+      <div id="dogOutput" style="background: #f9f9f9; padding: 1rem; border-radius: 5px; font-family: monospace;"></div>
+
+      <script>
+        function showDog() {
+          class Animal {
+            constructor(name) {
+              this.name = name;
+            }
+            speak() {
+              return `${this.name}이(가) 소리를 냅니다.`;
+            }
+          }
+
+          class Dog extends Animal {
+            speak() {
+              return `${this.name}이(가) 멍멍 짖습니다.`;
+            }
+          }
+
+          const dog = new Dog("초코");
+          document.getElementById("dogOutput").textContent = dog.speak();
+        }
+      </script>
+
+    </section>
+  </main>
+</body>
+
+</html>

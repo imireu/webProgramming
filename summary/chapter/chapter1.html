@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chapter 1: 웹 기초</title>
+  <link rel="stylesheet" href="/styles/index.css">
+  <link rel="stylesheet" href="/styles/chapterBase.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Chapter 1: 웹기초 / 웹프론트엔드</h1>
+  </header>
+  <main>
+    <section>
+      <h3>웹의 기본 구조: 클라이언트-서버 모델</h3>
+      <p>
+        - 클라이언트(Client): 서비스를 요청하는 주체. 대표적으로 웹 브라우저<br />
+        - 서버(Server): 요청을 처리하고 응답하는 컴퓨터. 웹서버, 앱서버 등<br />
+      </p>
+
+      <h3>클라이언트 구성 요소</h3>
+      <p>
+        - 웹 브라우저: 사용자가 URL을 입력하면 서버에 요청을 보내고 HTML 결과를 받아 화면에 렌더링함<br />
+        - 예: Chrome, Firefox, Edge 등
+      </p>
+
+      <h3>서버 구성 요소</h3>
+      <p>
+        - 웹 서버(Web Server): 클라이언트의 요청을 받아 정적 자원(HTML, CSS, JS)을 응답함<br />
+        - 애플리케이션 서버(App Server): 동적 웹페이지 생성, DB 연동 등 백엔드 로직 처리
+      </p>
+
+      <h3>웹의 3요소</h3>
+      <ul>
+        <li><strong>HTTP</strong>: 클라이언트와 서버 간 통신 규약</li>
+        <li><strong>URL</strong>: 웹에서 자원의 위치</li>
+        <li><strong>HTML</strong>: 웹페이지 구조를 정의하는 마크업 언어</li>
+      </ul>
+
+      <h3>URL 상세 설명</h3>
+      <h4>1. URI / URL / URN</h4>
+      <ul>
+        <li><strong>URI</strong> (Uniform Resource Identifier): 자원을 식별하는 전체 개념. URL과 URN 포함</li>
+        <li><strong>URL</strong> (Locator): 자원의 위치와 접근 방법을 명시 (예: https://example.com)</li>
+        <li><strong>URN</strong> (Name): 자원의 고유한 이름을 식별. 위치와는 무관 (예: urn:isbn:978-3-16-148410-0)</li>
+      </ul>
+
+      <h4>2. URL 구성 요소</h4>
+      <p>예시: <code>https://www.example.com:443/path/index.html?search=query#section</code></p>
+      <ul>
+        <li><strong>스키마 (Scheme)</strong>: <code>https</code> — 자원에 접근할 프로토콜 (http, https, ftp 등)</li>
+        <li><strong>호스트 (Host)</strong>: <code>www.example.com</code> — 자원이 위치한 서버 주소</li>
+        <li><strong>포트 (Port)</strong>: <code>443</code> — 서버와 통신할 포트 번호 (기본 포트는 생략 가능)</li>
+        <li><strong>경로 (Path)</strong>: <code>/path/index.html</code> — 서버 내부 자원의 경로</li>
+        <li><strong>쿼리 문자열 (Query String)</strong>: <code>?search=query</code> — 클라이언트가 서버에 전달하는 파라미터</li>
+        <li><strong>프래그먼트 (Fragment)</strong>: <code>#section</code> — 페이지 내 특정 위치로 이동</li>
+      </ul>
+
+      <pre><code>
+https://www.example.com:443/path/index.html?search=query#section
+└────┬────┘ └────────────┬────────────┘ └────┬────┘ └────┬────┘ └────┬────┘
+  스키마        호스트(도메인)               포트       경로       쿼리      해시
+        </code></pre>
+
+      <h3>DNS와 요청-응답 흐름</h3>
+      <ol>
+        <li>브라우저 주소창에 URL 입력</li>
+        <li>DNS 서버에 요청 → 도메인을 IP 주소로 변환</li>
+        <li>변환된 IP로 웹 서버에 요청 전송</li>
+        <li>서버가 요청을 처리하고 응답(HTML, CSS, JS 등)을 반환</li>
+        <li>브라우저가 응답 받은 HTML을 해석해 페이지를 화면에 렌더링</li>
+      </ol>
+
+      <h3>CSS 기본 구조</h3>
+      <pre><code>
+선택자 {
+  속성: 값;
+  속성: 값;
+}
+
+예시: 
+body {
+  background-color: #f5f5f5;
+  font-size: 16px;
+}
+        </code></pre>
+
+      <h3>JavaScript 기본 구조</h3>
+      <pre><code>
+// 변수 선언
+let message = "Hello World";
+
+// 함수 정의
+function greet(name) {
+  return "Hello, " + name + "!";
+}
+
+// 함수 호출
+console.log(greet("ChatGPT"));
+        </code></pre>
+      <br><br>
+      <a href="../index.html">← 메인으로 돌아가기</a>
+    </section>
+  </main>
+</body>
+
+</html>

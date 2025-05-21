@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chapter 9: 내장 객체와 실습</title>
+  <link rel="stylesheet" href="/styles/index.css">
+  <link rel="stylesheet" href="/styles/chapterBase.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Chapter 9: 내장 객체와 실습</h1>
+  </header>
+  <main>
+    <section>
+      <h2>1. 내장 객체</h2>
+      <p>자바스크립트에서 기본적으로 제공하는 객체로, 별도의 선언 없이 사용 가능합니다.</p>
+      <ul>
+        <li>대표 예: <code>window</code>, <code>Math</code>, <code>Date</code>, <code>Array</code>, <code>String</code>
+        </li>
+      </ul>
+
+      <h2>2. window 객체</h2>
+      <ul>
+        <li><code>alert()</code>, <code>confirm()</code>, <code>prompt()</code></li>
+        <li><code>setTimeout()</code>, <code>setInterval()</code></li>
+        <li><code>open()</code>: 새 창 열기</li>
+      </ul>
+      <pre><code>window.alert("안녕하세요!");
+window.open("https://example.com", "_blank", "width=400,height=300");</code></pre>
+
+      <h2>3. screen / history / location</h2>
+      <ul>
+        <li><code>screen.width</code>, <code>screen.height</code>: 화면 크기</li>
+        <li><code>history.back()</code>, <code>history.forward()</code></li>
+        <li><code>location.href</code>, <code>location.reload()</code></li>
+      </ul>
+
+      <h2>4. Date 객체</h2>
+      <p>시간 정보를 다루는 객체</p>
+      <pre><code>const now = new Date();
+const future = new Date("2024-12-25");
+
+console.log(now.getFullYear(), now.getMonth(), now.getDate());
+console.log(now.getHours(), now.getMinutes(), now.getSeconds());
+console.log(now.getTime()); // 1970.1.1 이후 경과 시간(ms)</code></pre>
+
+      <h3>시간 단위 변환</h3>
+      <ul>
+        <li>1초 = 1000ms</li>
+        <li>1분 = 60초, 1시간 = 60분, 1일 = 24시간</li>
+        <li>1일 = 1000 * 60 * 60 * 24 (ms 기준)</li>
+      </ul>
+
+      <h2>5. [실습] 만보 걷기 - 오늘까지 며칠째일까?</h2>
+      <p>기록 시작일로부터 오늘까지 며칠이 지났는지를 계산합니다.</p>
+
+      <pre><code>const firstDay = new Date("2023-01-01");
+      const today = new Date();
+      
+      const passedTime = today.getTime() - firstDay.getTime();
+      const passedDay = Math.floor(passedTime / (1000 * 60 * 60 * 24));
+      
+      document.querySelector("#result").textContent = passedDay + "일째입니다!";</code></pre>
+
+      <p id="result" style="font-weight: bold; font-size: 1.2rem; color: #2c3e50;"></p>
+
+      <script>
+        const firstDay = new Date("2023-01-01");
+        const today = new Date();
+
+        const passedTime = today.getTime() - firstDay.getTime();
+        const passedDay = Math.floor(passedTime / (1000 * 60 * 60 * 24));
+
+        document.getElementById("result").textContent = passedDay + "일째입니다!";
+      </script>
+
+
+      <h2>6. [실습] CSS 애니메이션 시계 만들기</h2>
+      <p>
+        <code>@keyframes</code>와 <code>transform</code>을 이용해 시계 초침을 회전<br />
+        자세한 예제는 아래 링크에서 확인
+      </p>
+      <p><a href="clock.html" target="_blank">시계 예제 보기</a></p>
+
+      <h2>7. Math 객체</h2>
+      <ul>
+        <li><code>Math.random()</code>: 0 이상 1 미만의 난수</li>
+        <li><code>Math.floor()</code>, <code>Math.ceil()</code>, <code>Math.round()</code></li>
+        <li><code>Math.max()</code>, <code>Math.min()</code>, <code>Math.pow()</code></li>
+      </ul>
+      <pre><code>console.log(Math.floor(Math.random() * 10));</code></pre>
+      <h2>8. [실습] 배경 이미지 무작위 변경</h2>
+      <p>버튼을 누르면 아래 박스의 배경 이미지가 무작위로 변경됩니다.</p>
+
+      <div id="imageBox" style="
+        width: 300px;
+        height: 200px;
+        border: 2px solid #ccc;
+        background-size: cover;
+        background-position: center;
+        margin: 1rem 0;
+      ">
+      </div>
+
+      <button onclick="changeBoxBg()" style="padding: 0.5rem 1rem;">배경 변경</button>
+
+      <pre><code>const images = [...];
+      const box = document.getElementById("imageBox");
+      box.style.backgroundImage = `url(...)`;</code></pre>
+
+      <script>
+        function changeBoxBg() {
+          const images = [
+            "https://picsum.photos/id/1015/400/300",
+            "https://picsum.photos/id/1018/400/300",
+            "https://picsum.photos/id/1020/400/300"
+          ];
+          const index = Math.floor(Math.random() * images.length);
+          const box = document.getElementById("imageBox");
+          box.style.backgroundImage = `url('${images[index]}')`;
+        }
+
+        // 처음 로드 시 한 번 적용
+        changeBoxBg();
+      </script>
+
+    </section>
+  </main>
+</body>
+
+</html>

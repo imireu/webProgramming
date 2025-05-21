@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chapter 7 - 이벤트 객체와 노드 조작</title>
+  <link rel="stylesheet" href="/styles/index.css">
+  <link rel="stylesheet" href="/styles/chapterBase.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Chapter 7: 이벤트 객체와 노드 조작</h1>
+  </header>
+
+  <main>
+    <h2>1. 이벤트 객체(Event Object)의 개념</h2>
+    <p>
+      브라우저에서 발생하는 모든 이벤트(클릭, 입력, 스크롤 등)는 이벤트 객체를 생성합니다.
+      이 객체에는 이벤트의 종류, 발생한 위치, 키보드 상태, 대상 요소 등에 대한 정보가 담겨 있습니다.
+      이벤트 리스너 함수에 매개변수로 전달되며, 다양한 속성과 메서드를 통해 상황을 제어할 수 있습니다.
+    </p>
+
+    <h3>대표적인 속성들</h3>
+    <ul>
+      <li><code>type</code>: 이벤트 종류 (예: "click", "keydown")</li>
+      <li><code>target</code>: 이벤트가 발생한 실제 요소</li>
+      <li><code>currentTarget</code>: 이벤트 핸들러가 등록된 요소</li>
+      <li><code>altKey</code>, <code>ctrlKey</code>, <code>shiftKey</code>: 보조 키 상태</li>
+      <li><code>clientX</code>, <code>clientY</code>: 마우스 위치 (브라우저 기준 좌표)</li>
+      <li><code>key</code>, <code>code</code>: 키보드 이벤트에서 눌린 키</li>
+    </ul>
+
+    <h3>대표적인 메서드들</h3>
+    <ul>
+      <li><code>preventDefault()</code>: 기본 동작 방지 (예: 링크 이동, 폼 제출 등)</li>
+      <li><code>stopPropagation()</code>: 이벤트 전파(버블링/캡처링) 중단</li>
+      <li><code>stopImmediatePropagation()</code>: 동일 요소의 다른 이벤트 핸들러까지도 실행 중지</li>
+    </ul>
+
+    <h3>예제 - 키보드 이벤트 속성</h3>
+    <pre><code>document.addEventListener("keydown", function(e) {
+    console.log("입력된 키:", e.key);
+    console.log("코드값:", e.code);
+    console.log("Shift 누름?:", e.shiftKey);
+  });</code></pre>
+
+    <h2>2. preventDefault()와 기본 동작</h2>
+    <p>
+      HTML 요소는 기본 동작을 가지고 있습니다. 예를 들어 &lt;a&gt; 태그는 링크 이동, &lt;form&gt;은 제출 등이 있으며,
+      <code>preventDefault()</code>를 사용하면 이를 막을 수 있습니다.
+    </p>
+    <pre><code>&lt;a href="https://google.com" id="link"&gt;구글로 이동&lt;/a&gt;
+  
+  document.getElementById("link").addEventListener("click", function(e) {
+    e.preventDefault();
+    alert("링크 이동이 막혔습니다!");
+  });</code></pre>
+
+    <h2>3. 이벤트 전파(Event Propagation)</h2>
+    <ul>
+      <li><strong>버블링</strong>: 이벤트가 가장 안쪽 요소부터 바깥으로 퍼짐 (기본 동작)</li>
+      <li><strong>캡처링</strong>: 바깥 요소부터 안쪽으로 내려오며 이벤트 감지 (옵션 사용 시)</li>
+      <li><strong>stopPropagation()</strong>: 전파 차단</li>
+    </ul>
+    <pre><code>&lt;div id="parent"&gt;
+    부모
+    &lt;button id="child"&gt;자식 버튼&lt;/button&gt;
+  &lt;/div&gt;
+  
+  document.getElementById("parent").addEventListener("click", () =&gt; {
+    alert("부모 요소 클릭됨");
+  });
+  document.getElementById("child").addEventListener("click", (e) =&gt; {
+    e.stopPropagation();
+    alert("자식 버튼 클릭됨 (부모 이벤트는 차단됨)");
+  });</code></pre>
+
+    <h2>4. target vs currentTarget</h2>
+    <p>
+      이벤트 위임(delegate)을 할 때 유용한 개념입니다.
+      <code>target</code>은 실제로 이벤트가 발생한 요소이며,
+      <code>currentTarget</code>은 이벤트 리스너가 연결된 요소입니다.
+    </p>
+    <pre><code>&lt;ul id="menu"&gt;
+    &lt;li&gt;항목1&lt;/li&gt;
+    &lt;li&gt;항목2&lt;/li&gt;
+  &lt;/ul&gt;
+  
+  document.getElementById("menu").addEventListener("click", function(e) {
+    alert("클릭한 요소: " + e.target.tagName + "\\n리스너는: " + e.currentTarget.id);
+  });</code></pre>
+
+    <h2>5. DOM 트리와 노드</h2>
+    <h3>DOM(Document Object Model)</h3>
+    <ul>
+      <li>HTML 문서를 JS가 객체처럼 다룰 수 있도록 만든 구조</li>
+      <li>모든 요소는 트리 형태의 노드로 표현됨</li>
+      <li>노드는 Element, Text, Attribute 등으로 나뉨</li>
+    </ul>
+    <pre><code>Document
+  └── html
+      ├── head
+      └── body
+          ├── h1
+          └── ul
+              └── li</code></pre>
+
+    <h2>6. NodeList와 반복</h2>
+    <p>
+      <code>querySelectorAll</code>로 얻은 NodeList는 배열처럼 보이지만 완전한 배열은 아닙니다.
+      <code>forEach</code>는 사용 가능하지만, <code>map</code>, <code>filter</code>는 사용 불가입니다.
+    </p>
+    <pre><code>const items = document.querySelectorAll("li");
+  items.forEach(item =&gt; {
+    item.addEventListener("click", () =&gt; {
+      alert(item.textContent + " 클릭됨");
+    });
+  });</code></pre>
+
+    <h2>7. 노드 추가 및 삭제</h2>
+    <ul>
+      <li><code>createElement()</code>: 새 요소 생성</li>
+      <li><code>appendChild()</code>, <code>insertBefore()</code>: 요소 추가</li>
+      <li><code>removeChild()</code>, <code>replaceChild()</code>, <code>element.remove()</code>: 요소 제거</li>
+    </ul>
+    <pre><code>const ul = document.getElementById("list");
+  const li = document.createElement("li");
+  li.textContent = "새 항목 추가됨!";
+  ul.appendChild(li); // 노드 추가
+  
+  ul.removeChild(ul.firstChild); // 첫 번째 항목 제거</code></pre>
+  </main>
+
+</body>
+
+</html>

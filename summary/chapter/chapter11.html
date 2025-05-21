@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chapter 11: HTTP와 JSON 통신</title>
+  <link rel="stylesheet" href="/styles/index.css">
+  <link rel="stylesheet" href="/styles/chapterBase.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Chapter 11: HTTP와 JSON 통신</h1>
+  </header>
+  <main>
+    <section>
+      <h2>1. HTTP와 HTTPS란?</h2>
+      <p>HTTP(HyperText Transfer Protocol)는 클라이언트와 서버 간에 데이터를 주고받기 위한 약속된 통신 규약</p>
+      <p>HTTPS는 보안 연결(SSL/TLS)이 적용된 HTTP</p>
+
+      <h2>2. 요청 헤더와 응답 헤더</h2>
+      <p>요청 헤더는 클라이언트가 서버에 정보를 요청할 때 함께 전송하는 메타 정보<br>
+        응답 헤더는 서버가 클라이언트에게 응답할 때 함께 보내는 부가 정보</p>
+      <pre><code>// 요청 예시 (Request Header)
+GET /index.html HTTP/1.1
+Host: www.example.com
+User-Agent: Chrome/113.0</code></pre>
+      <pre><code>// 응답 예시 (Response Header)
+HTTP/1.1 200 OK
+Content-Type: text/html
+Date: Sat, 21 May 2025 10:00:00 GMT</code></pre>
+
+      <h2>3. HTTP 요청 방식</h2>
+      <ul>
+        <li><strong>GET</strong>: 데이터를 조회할 때 사용</li>
+        <li><strong>POST</strong>: 새로운 데이터를 생성할 때 사용</li>
+        <li><strong>PUT</strong>: 데이터를 전체 수정할 때 사용</li>
+        <li><strong>PATCH</strong>: 데이터를 일부 수정할 때 사용</li>
+        <li><strong>DELETE</strong>: 데이터를 삭제할 때 사용</li>
+      </ul>
+
+      <h2>4. HTTP 응답 상태 코드</h2>
+      <ul>
+        <li><strong>2XX (성공)</strong> - 요청이 정상적으로 처리됨</li>
+        <li><strong>4XX (클라이언트 오류)</strong> - 요청이 잘못됨 (예: 404 Not Found)</li>
+        <li><strong>5XX (서버 오류)</strong> - 서버 내부 문제로 요청 처리 실패</li>
+      </ul>
+
+
+      <h2>5. JSON이란?</h2>
+      <p>JavaScript Object Notation의 줄임말로, 데이터를 구조화하여 교환할 때 사용하는 경량 데이터 포맷입니다.</p>
+      <ul>
+        <li>텍스트 기반</li>
+        <li>키-값 쌍으로 구성</li>
+        <li>프로그래밍 언어와 무관하게 사용 가능</li>
+      </ul>
+      <pre><code>{
+  "name": "이미르",
+  "age": 26,
+  "skills": ["HTML", "CSS", "JavaScript"]
+}</code></pre>
+
+      <h2>6. JSON 변환 메서드</h2>
+      <ul>
+        <li><code>JSON.stringify(obj)</code>: 자바스크립트 객체를 JSON 문자열로 변환</li>
+        <li><code>JSON.parse(jsonStr)</code>: JSON 문자열을 자바스크립트 객체로 변환</li>
+      </ul>
+      <pre><code>const user = { name: "미르", age: 26 };
+const jsonStr = JSON.stringify(user);
+const obj = JSON.parse(jsonStr);</code></pre>
+
+      <h2>7. XMLHttpRequest 객체</h2>
+      <p>비동기적으로 데이터를 요청할 수 있는 내장 객체</p>
+      <ul>
+        <li><code>open(method, url)</code>: 요청 초기화</li>
+        <li><code>send()</code>: 요청 전송</li>
+        <li><code>onreadystatechange</code>: 상태 변경 시 실행할 함수 지정</li>
+      </ul>
+
+      <h3>readyState 프로퍼티</h3>
+      <ul>
+        <li>0: 초기화되지 않음</li>
+        <li>1: 연결 설정됨</li>
+        <li>2: 요청 수신</li>
+        <li>3: 데이터 수신 중</li>
+        <li>4: 요청 완료</li>
+      </ul>
+      <h2>8. 실습: JSON 데이터 가져오기 (XMLHttpRequest)</h2>
+      <p>XMLHttpRequest를 사용해 로컬 JSON 파일에서 학생 정보를 가져옵니다.</p>
+
+      <pre><code>function loadStudents() {
+  let xhr = new XMLHttpRequest();
+  xhr.open("GET", "student-2.json");
+  xhr.send();
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      let students = JSON.parse(xhr.responseText);
+      renderHTML(students);
+    }
+  };
+}
+
+function renderHTML(contents) {
+  let htmlString = "";
+  for (let content of contents) {
+    htmlString += `
+      <div class="card">
+        <h3>${content.name}</h3>
+        <ul>
+          <li><strong>전공:</strong> ${content.major}</li>
+          <li><strong>학년:</strong> ${content.grade}</li>
+        </ul>
+      </div>
+    `;
+  }
+  document.getElementById("studentResult").innerHTML = htmlString;
+}</code></pre>
+
+      <button onclick="loadStudents()">📘 학생 정보 불러오기</button>
+      <div id="studentResult" class="output-box"></div>
+
+      <script>
+        function loadStudents() {
+          let xhr = new XMLHttpRequest();
+          xhr.open("GET", "student-2.json");
+          xhr.send();
+
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+              let students = JSON.parse(xhr.responseText);
+              renderHTML(students);
+            }
+          };
+        }
+
+        function renderHTML(contents) {
+          let htmlString = "";
+          for (let content of contents) {
+            htmlString += `
+              <div class="card">
+                <h3>${content.name}</h3>
+                <ul>
+                  <li><strong>전공:</strong> ${content.major}</li>
+                  <li><strong>학년:</strong> ${content.grade}</li>
+                </ul>
+              </div>
+            `;
+          }
+          document.getElementById("studentResult").innerHTML = htmlString;
+        }
+      </script>
+
+      <h2>9. fetch를 사용한 데이터 요청</h2>
+      <pre><code>const url = 'https://jsonplaceholder.typicode.com/users';
+fetch(url)
+  .then(response => response.json())
+  .then(users => console.log(users));</code></pre>
+
+      <h2>10. async/await 사용</h2>
+      <pre><code>async function init() {
+  const response = await fetch(url);
+  const users = await response.json();
+  console.log(users);
+}
+init();</code></pre>
+
+      <h2>11. 가져온 데이터를 화면에 출력</h2>
+      <pre><code>function display(users) {
+  const result = document.querySelector("#userResult");
+  let string = "";
+  users.forEach(user => {
+    string += `<div class="card">
+      <strong>${user.name}</strong><br>
+      아이디: ${user.username}<br>
+      이메일: ${user.email}
+    </div>`;
+  });
+  result.innerHTML = string;
+}</code></pre>
+
+
+      <h2>12. 예외 처리</h2>
+      <pre><code>try {
+  const obj = JSON.parse(jsonString);
+} catch (error) {
+  console.error("JSON 파싱 오류:", error);
+} finally {
+  console.log("파싱 시도 완료");
+}</code></pre>
+
+      <h2>13. 실습: 사용자 정보를 웹 브라우저에 출력하기</h2>
+      <p>fetch와 async/await를 사용해 사용자 JSON 데이터를 가져오고 웹 페이지에 출력</p>
+
+      <button onclick="loadUsers()">사용자 정보 불러오기</button>
+      <div id="userResult" class="output-box" style="margin-top: 1rem;"></div>
+
+      <script>
+        async function loadUsers() {
+          try {
+            const res = await fetch('https://jsonplaceholder.typicode.com/users');
+            const users = await res.json();
+            displayUsers(users);
+          } catch (err) {
+            console.error('데이터 요청 실패:', err);
+          }
+        }
+
+        function displayUsers(users) {
+          let html = '<h3>📄 사용자 정보</h3>';
+          users.forEach(user => {
+            html += `
+        <div class="card">
+          <strong>이름:</strong> ${user.name}<br>
+          <strong>아이디:</strong> ${user.username}<br>
+          <strong>이메일:</strong> ${user.email}
+        </div>
+      `;
+          });
+          document.getElementById("userResult").innerHTML = html;
+        }
+      </script>
+
+      <h3>🌱 요약</h3>
+      <ul>
+        <li>HTTP는 요청과 응답 기반의 통신 규약</li>
+        <li>GET, POST, PUT, DELETE 등 다양한 요청 방식 존재</li>
+        <li>JSON은 데이터 구조화 및 전송에 사용되는 포맷</li>
+        <li>XMLHttpRequest와 fetch로 서버에서 데이터 가져올 수 있음</li>
+        <li>async/await로 비동기 요청을 더 직관적으로 처리 가능</li>
+        <li>에러 처리는 try-catch-finally로 안정성 확보</li>
+      </ul>
+    </section>
+  </main>
+</body>
+
+</html>

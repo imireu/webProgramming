@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chapter 2: 자바스크립트 & HTML/CSS 개요</title>
+  <link rel="stylesheet" href="/styles/index.css">
+  <link rel="stylesheet" href="/styles/chapterBase.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Chapter 2: 웹프론트엔드 (2)</h1>
+  </header>
+  <main>
+    <section>
+      <h2>자바스크립트 역할</h2>
+      <ul>
+        <li>동적 처리</li>
+        <li>상호작용 처리</li>
+        <li>접근성 개선</li>
+        <li>사용자 경험(UX) 개선</li>
+        <li>애플리케이션 개발 (SPA, PWA 등)</li>
+        <li>브라우저 내 제어 (폼 검증, 이벤트 핸들링 등)</li>
+      </ul>
+
+      <h2>자바스크립트 작성법</h2>
+      <ul>
+        <li>인라인 방식: HTML 태그 내 직접 삽입</li>
+        <li>인터널 방식: &lt;script&gt; 태그 내부에 작성</li>
+        <li>익스터널 방식: 외부 JS 파일로 분리하여 &lt;script src="..."&gt;</li>
+        <li>필요할 때 DOM을 통해 코드 생성 및 삽입</li>
+      </ul>
+
+      <h2>HTML & 웹 버전</h2>
+      <ul>
+        <li>HTML 1.0 ~ 4.01: 문서 구조 중심, 점차 확장</li>
+        <li><strong>HTML5</strong>: 시맨틱 태그, 멀티미디어 지원, API 추가 등 현대 웹에 맞게 개편</li>
+      </ul>
+
+      <h3>HTML5에 추가된 주요 자바스크립트 API</h3>
+      <ul>
+        <li>Geolocation API</li>
+        <li>Drag & Drop</li>
+        <li>Web Storage (localStorage, sessionStorage)</li>
+        <li>Application Cache (현재는 deprecated)</li>
+        <li>Web Workers</li>
+        <li>Server-Sent Events</li>
+      </ul>
+
+      <h2>TypeScript</h2>
+      <p>정적 타입을 가진 자바스크립트의 상위 버전</p>
+      <ul>
+        <li>장점: 컴파일 단계에서 오류 확인 가능, 코드 완성도 및 유지보수 향상</li>
+        <li>단점: 학습 곡선, 빌드 필요</li>
+      </ul>
+
+      <h2>프론트엔드 프레임워크 및 라이브러리</h2>
+      <ul>
+        <li>React: 컴포넌트 기반 UI 라이브러리</li>
+        <li>Vue: 쉽고 빠르게 UI 구축 가능한 프레임워크</li>
+        <li>Angular: 대규모 앱 구축에 적합한 프레임워크</li>
+        <li>jQuery: DOM 제어 편의성 제공</li>
+        <li>Next.js, Vite, Astro 등 번들링/라우팅 도구</li>
+      </ul>
+
+      <h2>ECMAScript (ES)</h2>
+      <p>자바스크립트의 표준 사양. 최신 버전은 ES2023까지 발표됨.</p>
+
+      <h2>HTML Tags</h2>
+      <p><strong>참조 사이트</strong>: <a href="https://www.w3schools.com/">W3C</a>, <a
+          href="https://developer.mozilla.org/ko/">Mozilla MDN</a>
+      <ul>
+        <li>Basic Tags: html, head, body, div, span, h1~h6, p 등</li>
+        <li>Forms & Inputs: form, input, select, textarea, button</li>
+        <li>Frames: iframe 등</li>
+        <li>Media: img, audio, video</li>
+        <li>Links: a, nav</li>
+        <li>Lists: ul, ol, li, dir, dl, dt, dd</li>
+        <li>Tables: table, thead, tbody, tr, th, td</li>
+        <li>Style & Semantics: style, b, strong, em, mark</li>
+        <li>Meta Info: title, meta, link</li>
+        <li>Metadata Content: base, meta, noscript, script, style, title</li>
+        <li>Programming: script, noscript, canvas</li>
+      </ul>
+
+      <h2>CSS 개요</h2>
+      <ul>
+        <li>HTML은 구조, CSS는 표현, JS는 동작</li>
+        <li>CSS 기능: 색상, 크기, 레이아웃, 애니메이션 등</li>
+        <li>작성 위치: 인라인, 인터널, 익스터널</li>
+        <li>적용 순서: 인라인 > 인터널 > 익스터널 (Cascading)</li>
+      </ul>
+
+      <h3>CSS 셀렉터 예시</h3>
+      <ul>
+        <li>전체 선택자: *</li>
+        <li>태그 선택자: p</li>
+        <li>클래스 선택자: .class</li>
+        <li>아이디 선택자: #id</li>
+        <li>자식 선택자: div > p</li>
+      </ul>
+
+      <h3>CSS 선언 형식</h3>
+      <pre><code>
+선택자 {
+  속성: 값;
+  속성: 값;
+}
+        </code></pre>
+
+      <h3>컬러 지정 방식</h3>
+      <ul>
+        <li>이름: red, blue 등</li>
+        <li>Hex: #ff0000</li>
+        <li>RGB: rgb(255, 0, 0)</li>
+        <li>RGBA: rgba(255, 0, 0, 0.5)</li>
+        <li>HSL: hsl(0, 100%, 50%)</li>
+      </ul>
+      <br><br>
+      <a href="../index.html">← 메인으로 돌아가기</a>
+    </section>
+  </main>
+</body>
+
+</html>
