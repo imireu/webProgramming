@@ -67,14 +67,11 @@ header.minimal-header {
 }
 
 .book-card {
-  background-color: #fff;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
-  transition: transform 0.2s ease;
-  text-align: center;
+  background: transparent;
+  box-shadow: none;
+  text-align: left;
+  padding: 0.5rem 0;
 }
-
 .book-card:hover {
   transform: translateY(-4px);
 }
@@ -86,8 +83,16 @@ header.minimal-header {
 }
 
 .book-card h3 {
-  font-size: 1rem;
-  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #000;
+  margin: 0.3rem 0 0.2rem;
+}
+
+.book-card p {
+  font-size: 0.8rem;
+  color: #999;
+  margin: 0;
 }
 
 footer {

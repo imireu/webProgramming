@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Detail</title>
+  <link rel="stylesheet" href="styles/index.css" />
+  <link rel="stylesheet" href="styles/book.css" />
+</head>
+
+<body>
+  <header class="minimal-header">
+    <div class="container header-flex">
+      <h1 class="logo">Booklog</h1>
+      <nav class="nav-links">
+        <a href="index.html">Books</a>
+        <a href="#">Favorites</a>
+        <a href="#">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="bookDetail" class="book-detail"></section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 Booklog. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const isbnRaw = params.get("isbn");
+    const isbn = isbnRaw?.split(" ")[0];
+    const bookDetail = document.getElementById("bookDetail");
+
+    async function fetchBook() {
+      if (!isbn) {
+        bookDetail.innerHTML = "<p>No book selected.</p>";
+        return;
+      }
+      try {
+        const res = await fetch(
+          `https://dapi.kakao.com/v3/search/book?target=isbn&query=${isbn}`,
+          {
+            headers: {
+              Authorization: "KakaoAK f4906d2bc6590e1f813b127700db09ae",
+            },
+          }
+        );
+        const data = await res.json();
+        const book = data.documents[0];
+        renderBook(book);
+      } catch (e) {
+        bookDetail.innerHTML = "<p>Failed to load book information.</p>";
+      }
+    }
+
+    function renderBook(book) {
+      bookDetail.innerHTML = `
+        <img src="${book.thumbnail || 'assets/no-image.jpg'}" alt="${book.title}" />
+        <div class="book-text">
+          <h2>${book.title}</h2>
+          <div class="book-meta">
+            ${book.authors.join(", ")} · ${book.publisher} · ${book.datetime.slice(0, 10)}<br/>
+            ISBN: ${book.isbn}
+          </div>
+          <div class="book-description">
+            ${book.contents || "No description available."}
+          </div>
+        </div>
+      `;
+    }
+
+    fetchBook();
+  </script>
+</body>
+
+</html>
