@@ -66,14 +66,13 @@ function renderBookCard(book) {
 
   const raw = localStorage.getItem("bookmarks");
   let bookmarks = [];
-
   try {
     bookmarks = raw ? JSON.parse(raw) : [];
   } catch (e) {
     bookmarks = [];
   }
-
   const isBookmarked = bookmarks.includes(book.isbn);
+
   bookCard.innerHTML = `
     <a href="book.html?isbn=${book.isbn}">
       <img src="${book.thumbnail || 'assets/images/no-image.jpg'}" alt="${book.title}" />
@@ -111,8 +110,6 @@ function renderBookCard(book) {
       bookmarkBtn.textContent = "❤️";
     }
   });
-
-
   bookList.appendChild(bookCard);
 }
 
@@ -160,3 +157,4 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
 window.addEventListener("DOMContentLoaded", () => {
   updateLoginUI();
 });
+

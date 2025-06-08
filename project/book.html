@@ -15,14 +15,32 @@
       <h1 class="logo">Booklog</h1>
       <nav class="nav-links">
         <a href="index.html">Books</a>
-        <a href="#">Favorites</a>
-        <a href="#">Login</a>
+        <a href="favorites.html">Favorites</a>
+        <a href="login.html" id="loginLink">Login</a>
+        <button id="logoutBtn" style="display: none;">Logout</button>
       </nav>
     </div>
   </header>
 
   <main class="container">
-    <section id="bookDetail" class="book-detail"></section>
+    <section id="bookDetail" class="book-detail">
+
+    </section>
+    <section id="reviewSection" class="review-area">
+      <h3>리뷰 작성</h3>
+      <div class="star-rating" id="starRating">
+        <span data-value="5">★</span>
+        <span data-value="4">★</span>
+        <span data-value="3">★</span>
+        <span data-value="2">★</span>
+        <span data-value="1">★</span>
+      </div>
+      <textarea id="reviewText" placeholder="리뷰를 입력하세요"></textarea>
+      <button id="submitReview">리뷰 등록</button>
+
+      <h4 style="margin-top: 2rem;">작성된 리뷰</h4>
+      <ul id="reviewList"></ul>
+    </section>
   </main>
 
   <footer>
@@ -31,52 +49,7 @@
     </div>
   </footer>
 
-  <script>
-    const params = new URLSearchParams(location.search);
-    const isbnRaw = params.get("isbn");
-    const isbn = isbnRaw?.split(" ")[0];
-    const bookDetail = document.getElementById("bookDetail");
-
-    async function fetchBook() {
-      if (!isbn) {
-        bookDetail.innerHTML = "<p>No book selected.</p>";
-        return;
-      }
-      try {
-        const res = await fetch(
-          `https://dapi.kakao.com/v3/search/book?target=isbn&query=${isbn}`,
-          {
-            headers: {
-              Authorization: "KakaoAK f4906d2bc6590e1f813b127700db09ae",
-            },
-          }
-        );
-        const data = await res.json();
-        const book = data.documents[0];
-        renderBook(book);
-      } catch (e) {
-        bookDetail.innerHTML = "<p>Failed to load book information.</p>";
-      }
-    }
-
-    function renderBook(book) {
-      bookDetail.innerHTML = `
-        <img src="${book.thumbnail || 'assets/no-image.jpg'}" alt="${book.title}" />
-        <div class="book-text">
-          <h2>${book.title}</h2>
-          <div class="book-meta">
-            ${book.authors.join(", ")} · ${book.publisher} · ${book.datetime.slice(0, 10)}<br/>
-            ISBN: ${book.isbn}
-          </div>
-          <div class="book-description">
-            ${book.contents || "No description available."}
-          </div>
-        </div>
-      `;
-    }
-
-    fetchBook();
-  </script>
+  <script src="./book.js"></script>
 </body>
 
 </html>
