@@ -1,7 +1,23 @@
+@font-face {
+  font-family: "OG_Renaissance_Secret-Rg";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/OG_Renaissance_Secret-Rg.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "designhouseOTFLight00";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/designhouseOTFLight00.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "designhouseOTFLight00", "OG_Renaissance_Secret-Rg";
 }
 
 body {
@@ -32,13 +48,18 @@ header.minimal-header {
 }
 
 .logo {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
+}
+.logo a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .nav-links {
   display: flex;
   gap: 1.2rem;
+  font-size: 1.3rem;
 }
 
 .nav-links a {
@@ -57,6 +78,7 @@ header.minimal-header {
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 220px;
+  font-size: 1rem;
 }
 
 .book-grid {
@@ -101,7 +123,7 @@ header.minimal-header {
 
 .book-card h3 {
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
   color: #111;
   margin: 0.2rem 0 0.1rem;
   white-space: nowrap;

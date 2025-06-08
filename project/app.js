@@ -33,6 +33,7 @@ async function fetchBooks(query) {
 
 // 초기 리스트 불러오기
 window.addEventListener("DOMContentLoaded", () => {
+  updateLoginUI();
   curatedBooks = [];
   curatedIsbns.forEach((isbn) => fetchBookByIsbn(isbn));
 });
@@ -63,9 +64,16 @@ function renderBookCard(book) {
   const bookCard = document.createElement("div");
   bookCard.className = "book-card";
 
-  const bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
-  const isBookmarked = bookmarks.includes(book.isbn);
+  const raw = localStorage.getItem("bookmarks");
+  let bookmarks = [];
 
+  try {
+    bookmarks = raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    bookmarks = [];
+  }
+
+  const isBookmarked = bookmarks.includes(book.isbn);
   bookCard.innerHTML = `
     <a href="book.html?isbn=${book.isbn}">
       <img src="${book.thumbnail || 'assets/images/no-image.jpg'}" alt="${book.title}" />
@@ -79,6 +87,7 @@ function renderBookCard(book) {
   `;
 
   const bookmarkBtn = bookCard.querySelector(".bookmark-btn");
+
   bookmarkBtn.addEventListener("click", (e) => {
     e.preventDefault();
     const nickname = localStorage.getItem("nickname");
@@ -88,18 +97,21 @@ function renderBookCard(book) {
     }
 
     const isbn = bookmarkBtn.dataset.isbn;
-    const current = JSON.parse(localStorage.getItem("bookmarks")) || [];
+    let current = JSON.parse(localStorage.getItem("bookmarks")) || [];
 
     if (current.includes(isbn)) {
       const updated = current.filter((b) => b !== isbn);
       localStorage.setItem("bookmarks", JSON.stringify(updated));
+      localStorage.setItem(`bookmarks_${nickname}`, JSON.stringify(updated));
       bookmarkBtn.textContent = "♡";
     } else {
       current.push(isbn);
       localStorage.setItem("bookmarks", JSON.stringify(current));
+      localStorage.setItem(`bookmarks_${nickname}`, JSON.stringify(current));
       bookmarkBtn.textContent = "❤️";
     }
   });
+
 
   bookList.appendChild(bookCard);
 }
@@ -115,15 +127,17 @@ function updateLoginUI() {
     loginLink.href = "#";
     logoutBtn.style.display = "inline";
 
-    // 로그인 시, 개인 찜 데이터 복원
     const saved = localStorage.getItem(`bookmarks_${nickname}`) || "[]";
     localStorage.setItem("bookmarks", saved);
   } else {
     loginLink.textContent = "Login";
     loginLink.href = "login.html";
     logoutBtn.style.display = "none";
+
+    localStorage.removeItem("bookmarks");
   }
 }
+
 
 // 로그아웃 처리
 document.getElementById("logoutBtn").addEventListener("click", () => {

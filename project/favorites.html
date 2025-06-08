@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Favorite Books</title>
+  <link rel="stylesheet" href="./styles/index.css" />
+</head>
+
+<body>
+  <header class="minimal-header">
+    <div class="container header-flex">
+      <h1 class="logo">Booklog</h1>
+      <nav class="nav-links">
+        <a href="index.html">Books</a>
+        <a href="favorite.html" class="active">Favorites</a>
+        <a href="login.html" id="loginLink">Login</a>
+        <button id="logoutBtn" style="display: none;">Logout</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2 style="margin-bottom: 1rem;">찜한 도서 목록</h2>
+    <section id="bookList" class="book-grid"></section>
+  </main>
+
+  <footer>
+    <p>© 2025 Booklog. All rights reserved.</p>
+  </footer>
+
+  <script src="favorites.js"> </script>
+</body>
+
+</html>
