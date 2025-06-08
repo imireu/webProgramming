@@ -1,14 +1,7 @@
 @font-face {
-  font-family: "OG_Renaissance_Secret-Rg";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/OG_Renaissance_Secret-Rg.woff2")
+  font-family: "Ownglyph_ParkDaHyun";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2411-3@1.0/Ownglyph_ParkDaHyun.woff2")
     format("woff2");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "designhouseOTFLight00";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/designhouseOTFLight00.woff")
-    format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -17,11 +10,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "designhouseOTFLight00", "OG_Renaissance_Secret-Rg";
+  font-family: "Ownglyph_ParkDaHyun", "Noto Sans KR", sans-serif;
 }
 
 body {
-  font-family: "Noto Sans KR", sans-serif;
   background-color: #fafafa;
   color: #333;
   line-height: 1.6;
